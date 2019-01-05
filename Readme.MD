@@ -8,8 +8,8 @@ Laravel package to acl basic setup
       $ php artisan vendor:publish --tag=migration
       $ php artisan vendor:publish --tag=config
    ```
-2. In config/auth-setup.php Change the value of model key to User model
-3. Use the AuthSetup/Traits/Role in User Model
+2. In config/auth-setup.php Change the value of model key to your User model
+3. Use the AuthSetup/Traits/Role in your User Model
 
 WIP
 === 
