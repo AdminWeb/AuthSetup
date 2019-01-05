@@ -29,7 +29,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "AdminWeb\\AuthSetup\\AuthSetupServiceProvider"
+        "AuthSetup\\AuthSetupServiceProvider"
       ]
     }
   }
