@@ -8,6 +8,7 @@
 use AuthSetup\Models\Role;
 use AuthSetup\Tests\Fixtures\User;
 use Orchestra\Testbench\TestCase;
+use Illuminate\Support\Facades\Schema;
 class AuthSetupTest extends TestCase
 {
     protected function getPackageProviders($app)
@@ -21,6 +22,19 @@ class AuthSetupTest extends TestCase
         $this->loadLaravelMigrations(['--database' => 'testing']);
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
         $this->artisan('migrate', ['--database' => 'testing']);
+       if(!is_dir(__DIR__.'/../vendor/orchestra/testbench-core/src/Concerns/../../laravel/app')){
+           mkdir(__DIR__.'/../vendor/orchestra/testbench-core/src/Concerns/../../laravel/app/Http/Controllers/', 0755, true);
+       }
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        if(is_dir(resource_path('views/'))){
+            $directory = resource_path('views/');
+            exec("rm -rf $directory");
+        }
+
     }
     protected function getEnvironmentSetUp($app)
     {
@@ -63,5 +77,15 @@ class AuthSetupTest extends TestCase
         ]);
 
         $this->assertEquals(0, $user->role()->count());
+    }
+
+    /**
+     * @test
+     *
+     */
+    public function CommandPublisheContent()
+    {
+        $this->artisan('auth-setup:setup');
+        $this->assertTrue(Schema::hasSchema('roles'));
     }
 }

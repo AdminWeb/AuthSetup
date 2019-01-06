@@ -5,6 +5,7 @@
     "phpunit/phpunit": "^7.3",
     "orchestra/testbench": "^3.7"
   },
+  "version": "0.0.5",
   "license": "MIT",
   "autoload": {
     "psr-4": {

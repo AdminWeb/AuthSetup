@@ -8,6 +8,7 @@
 
 namespace AuthSetup;
 
+use AuthSetup\Commands\Setup;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class AuthSetupServiceProvider extends BaseServiceProvider
@@ -24,6 +25,11 @@ class AuthSetupServiceProvider extends BaseServiceProvider
         ], 'migrations');
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
 
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Setup::class,
+            ]);
+        }
     }
 
     public function register()
