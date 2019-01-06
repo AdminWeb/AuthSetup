@@ -27,9 +27,12 @@ class Setup extends Command
      */
     public function handle()
     {
-      Artisan::call('vendor:publish',['--provider'=>"AuthSetup\AuthSetupServiceProvider"]);
-      Artisan::call('migrate');
-      Artisan::call('make:auth');
-      $this->info('Auth Setup complete!');
+        Artisan::call('vendor:publish', ['--provider' => "AuthSetup\AuthSetupServiceProvider"]);
+        $this->info('Published files complete!');
+        Artisan::call('migrate');
+        $this->info('Migrate table complete!');
+        Artisan::call('make:auth');
+        $this->info('Auth scaffold complete!');
+        $this->info('Auth Setup complete!');
     }
 }
